@@ -1,5 +1,5 @@
-const CACHE='laxman-iptv-v13';
-const APP=['./','./index.html','./style.css','./rows.css','./v12-player.css','./v13-tv.css','./app-tv.js','./v9-player.js','./v10-player.js','./v11-player.js','./v12-player.js','./v13-tv.js','./manifest.webmanifest'];
+const CACHE='laxman-iptv-v14';
+const APP=['./','./index.html','./style.css','./rows.css','./v12-player.css','./v13-tv.css','./v14-tv.css','./app-tv.js','./v9-player.js','./v10-player.js','./v11-player.js','./v12-player.js','./v13-tv.js','./v14-tv.js','./manifest.webmanifest'];
 self.addEventListener('install',e=>e.waitUntil(caches.open(CACHE).then(c=>c.addAll(APP)).then(()=>self.skipWaiting())));
 self.addEventListener('activate',e=>e.waitUntil(caches.keys().then(keys=>Promise.all(keys.filter(k=>k!==CACHE).map(k=>caches.delete(k)))).then(()=>self.clients.claim())));
 self.addEventListener('fetch',e=>{const u=new URL(e.request.url);if(u.origin!==location.origin||u.pathname.toLowerCase().endsWith('.m3u'))return;e.respondWith(caches.match(e.request).then(cached=>cached||fetch(e.request).then(r=>{const copy=r.clone();caches.open(CACHE).then(c=>c.put(e.request,copy));return r}).catch(()=>caches.match('./index.html'))))});
