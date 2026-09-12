@@ -3,7 +3,8 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
-  <meta name="theme-color" content="#08090d">
+  <meta name="theme-color" content="#07080c">
+  <meta name="color-scheme" content="dark">
   <title>Laxman IPTV</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -11,44 +12,48 @@
   <link rel="stylesheet" href="style.css">
 </head>
 <body>
-  <header class="topbar">
-    <a class="brand" href="#"><span class="brand-mark">▶</span><span>Laxman <b>IPTV</b></span></a>
-    <div class="header-actions">
-      <label class="search"><span>⌕</span><input id="searchInput" type="search" placeholder="Search channels…" autocomplete="off"></label>
-      <button id="themeBtn" class="icon-btn" title="Toggle theme">☾</button>
+<header class="topbar">
+  <a class="brand" href="#top"><span class="brand-mark">▶</span><span>Laxman <b>IPTV</b></span></a>
+  <div class="header-actions">
+    <label class="search"><span>⌕</span><input id="searchInput" type="search" placeholder="Search channels…" autocomplete="off"></label>
+    <button id="themeBtn" class="icon-btn" title="Toggle theme" aria-label="Toggle theme">☾</button>
+  </div>
+</header>
+<main id="top">
+  <section class="hero">
+    <div><p class="eyebrow">LIVE TELEVISION</p><h1>Your TV.<br><span>All channels.</span></h1><p class="sub">Load every M3U playlist together, then browse like a modern smart TV.</p></div>
+    <div class="stats"><div><strong id="channelCount">0</strong><small>Channels</small></div><div><strong id="categoryCount">0</strong><small>Sources</small></div></div>
+  </section>
+
+  <section class="tv-toolbar">
+    <div class="section-title"><span class="live-dot"></span><strong>Live TV</strong><span id="visibleCount">Loading…</span></div>
+    <div class="toolbar-actions"><button id="favoritesBtn" class="small-btn">☆ Favorites</button><button id="recentBtn" class="small-btn">◷ Recent</button><button id="refreshBtn" class="small-btn">↻ Refresh</button></div>
+  </section>
+
+  <nav id="categories" class="categories" aria-label="Categories"></nav>
+
+  <section class="watch-layout">
+    <div class="player-wrap">
+      <div class="player-shell" id="playerShell">
+        <video id="video" playsinline controls preload="metadata"></video>
+        <div class="player-overlay" id="playerOverlay"><div class="spinner"></div><p id="playerStatus">Select a channel to start</p></div>
+        <div class="player-nav"><button id="prevBtn" title="Previous channel">‹</button><button id="nextBtn" title="Next channel">›</button></div>
+      </div>
+      <div class="now-playing">
+        <div class="channel-avatar" id="nowAvatar">TV</div><div class="now-copy"><strong id="nowTitle">No channel selected</strong><span id="nowMeta">Choose a channel from the list</span></div>
+        <button id="favoriteBtn" class="control-btn">☆</button><button id="pipBtn" class="control-btn">▣ PiP</button><button id="fullscreenBtn" class="control-btn">⛶</button>
+      </div>
     </div>
-  </header>
-
-  <main>
-    <section class="hero">
-      <div>
-        <p class="eyebrow">LIVE TELEVISION</p>
-        <h1>Watch live. <span>Scroll & discover.</span></h1>
-        <p class="sub">All channels are loaded together from your M3U playlists. Pick any channel and keep scrolling through the catalogue.</p>
-      </div>
-      <div class="stats"><div><strong id="channelCount">0</strong><small>Channels</small></div><div><strong id="categoryCount">0</strong><small>Categories</small></div></div>
-    </section>
-
-    <nav id="categories" class="categories" aria-label="Categories"></nav>
-
-    <section class="watch-layout">
-      <div class="player-wrap">
-        <div class="player-shell" id="playerShell">
-          <video id="video" playsinline controls preload="metadata"></video>
-          <div id="playerOverlay" class="player-overlay">
-            <div class="spinner"></div><p id="playerStatus">Select a channel to start</p>
-          </div>
-        </div>
-        <div class="now-playing"><div class="channel-avatar" id="nowAvatar">TV</div><div class="now-copy"><strong id="nowTitle">No channel selected</strong><span id="nowMeta">Choose a channel from the list</span></div><button id="pipBtn" class="control-btn">▣ PiP</button><button id="fullscreenBtn" class="control-btn">⛶</button></div>
-      </div>
-      <aside class="channel-panel">
-        <div class="panel-head"><div><h2 id="listTitle">All Channels</h2><span id="visibleCount">Loading…</span></div><button id="refreshBtn" class="refresh">↻</button></div>
-        <div id="channelList" class="channel-list"></div>
-      </aside>
-    </section>
-  </main>
-  <footer>Use only streams you are authorized to access. Stream availability depends on the source provider.</footer>
-  <script src="https://cdn.jsdelivr.net/npm/hls.js@latest"></script>
-  <script src="app.js"></script>
+    <aside class="channel-panel">
+      <div class="panel-head"><div><h2 id="listTitle">All Channels</h2><span id="panelHint">Scroll to change channel</span></div><span class="tv-badge">LIVE</span></div>
+      <div id="channelList" class="channel-list"></div>
+    </aside>
+  </section>
+  <section class="browse-section"><div class="browse-head"><h2>Browse channels</h2><span>All playlists loaded</span></div><div id="channelRail" class="channel-rail"></div></section>
+</main>
+<footer>Use only streams you are authorized to access. Stream availability depends on the source provider.</footer>
+<nav class="mobile-nav"><button data-nav="top">⌂<span>Home</span></button><button data-nav="player">▶<span>Live</span></button><button data-nav="favorites">☆<span>Favorites</span></button><button data-nav="categories">▦<span>Categories</span></button></nav>
+<script src="https://cdn.jsdelivr.net/npm/hls.js@latest"></script>
+<script src="app.js"></script>
 </body>
 </html>
