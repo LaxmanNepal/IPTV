@@ -1,0 +1,20 @@
+(()=>{
+const v=document.getElementById('video');if(!v)return;
+let current=null,retries=0,timer=0,token=0;
+const wait=ms=>new Promise(r=>setTimeout(r,ms));
+const state=s=>{const id=current?.id;if(!id)return;const b=document.querySelector(`.channel[data-id="${CSS.escape(id)}"] .stream-state`);if(!b)return;b.textContent=s==='live'?'●':s==='retry'?'↻':s==='error'?'!':'◐';b.className=`stream-state ${s}`;b.title=s==='live'?'Playing':s==='retry'?'Retrying':s==='error'?'Stream unavailable':'Connecting'};
+const overlay=(text,spin=true)=>{const o=document.getElementById('playerOverlay'),p=document.getElementById('playerStatus');if(o&&p){o.classList.remove('hidden');p.textContent=text;const x=o.querySelector('.spinner');if(x)x.style.display=spin?'block':'none'}};
+const recover=()=>{const h=window.__iptvHls;if(!h)return;try{h.startLoad(-1)}catch(_){}try{if(v.readyState<3)h.recoverMediaError()}catch(_){}try{v.play().catch(()=>{})}catch(_){}};
+const arm=c=>{clearTimeout(timer);const t=++token;retries=0;current=c;state('connecting');
+ const tick=async()=>{if(t!==token||!current)return;if(!v.paused&&v.readyState>=3)return;if(retries>=3){state('error');overlay('Stream unavailable — try Refresh',false);return}retries++;state('retry');overlay(retries===1?'Connecting…':`Reconnecting ${retries}/3…`);recover();await wait(900+retries*900);if(t===token&&!v.paused&&v.readyState>=3)return;if(t===token)tick()};
+ timer=setTimeout(tick,6500);
+};
+const oldPlay=window.play;
+if(typeof oldPlay==='function')window.play=function(c){current=c;arm(c);return oldPlay(c)};
+v.addEventListener('playing',()=>{clearTimeout(timer);retries=0;state('live')});
+v.addEventListener('waiting',()=>{if(!current)return;state('buffering');clearTimeout(timer);timer=setTimeout(recover,1200)});
+v.addEventListener('stalled',()=>{if(!current)return;state('retry');clearTimeout(timer);timer=setTimeout(recover,900)});
+v.addEventListener('error',()=>{if(!current)return;state('retry');clearTimeout(timer);timer=setTimeout(recover,500)});
+window.addEventListener('online',()=>{if(current)recover()});
+document.addEventListener('visibilitychange',()=>{if(!document.hidden&&current&&v.paused)v.play().catch(()=>{})});
+})();
