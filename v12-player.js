@@ -1,0 +1,11 @@
+(()=>{
+const v=document.getElementById('video'),shell=document.getElementById('playerShell');if(!v||!shell)return;
+const KEY='laxmanIptvQuality';let menu,button,lastHls=null,lastLevels=0;
+const esc=s=>String(s).replace(/[&<>\"']/g,x=>({'&':'&amp;','<':'&lt;','>':'&gt;','\"':'&quot;',"'":'&#39;'}[x]));
+const quality=(h,i)=>{try{h.currentLevel=i;localStorage.setItem(KEY,String(i))}catch(_){};render(h)};
+function label(level,i){const h=level?.height?`${level.height}p`:level?.width?`${level.width}p`:level?.bitrate?`${Math.round(level.bitrate/1000)} kbps`:`Level ${i+1}`;return h}
+function render(h){if(!menu||!h)return;const levels=h.levels||[];const current=h.autoLevelEnabled?-1:h.currentLevel;menu.innerHTML='';const items=[{i:-1,t:'Auto'}];levels.forEach((l,i)=>items.push({i,t:label(l,i)}));items.sort((a,b)=>a.i===-1?-1:b.i===-1?1:(levels[b.i]?.height||0)-(levels[a.i]?.height||0));items.forEach(x=>{const b=document.createElement('button');b.type='button';b.textContent=`${x.t}${x.i===current?' ✓':''}`;b.onclick=()=>{quality(h,x.i);menu.classList.remove('open')};menu.appendChild(b)});button.textContent=current===-1?'AUTO':(levels[current]?label(levels[current],current):'QUALITY')}
+function ensure(){if(button)return;button=document.createElement('button');button.className='quality-btn';button.type='button';button.textContent='AUTO';button.title='Video quality';button.setAttribute('aria-label','Video quality');menu=document.createElement('div');menu.className='quality-menu';menu.setAttribute('role','menu');button.onclick=e=>{e.stopPropagation();const h=window.__iptvHls;if(!h)return;render(h);menu.classList.toggle('open')};shell.append(button,menu);document.addEventListener('click',()=>menu.classList.remove('open'))}
+function bind(h){if(!h||h===lastHls)return;lastHls=h;lastLevels=0;ensure();const refresh=()=>{if((h.levels||[]).length!==lastLevels){lastLevels=(h.levels||[]).length;render(h)}};h.on?.(Hls.Events.MANIFEST_PARSED,refresh);h.on?.(Hls.Events.LEVEL_SWITCHED,()=>render(h));h.on?.(Hls.Events.ERROR,()=>setTimeout(()=>{if(window.__iptvHls===h)render(h)},100));refresh();const saved=Number(localStorage.getItem(KEY));if(Number.isInteger(saved)&&saved>=0&&(h.levels||[])[saved])quality(h,saved);else render(h)}
+ensure();setInterval(()=>{const h=window.__iptvHls;if(h)bind(h)},500);
+})();
