@@ -6,27 +6,37 @@
   const guidePanel=document.querySelector('.tv-guide');
   let booted=false;
 
-  function focusSearch(){
-    if(!search)return;
-    headerSearch?.classList.add('mobile-search-open');
-    search.focus({preventScroll:true});
-    search.select?.();
-    window.scrollTo({top:0,behavior:'smooth'});
+  function focusSearch(e){
+    e?.preventDefault?.();
+    e?.stopPropagation?.();
+    if(!search||!headerSearch)return;
+    headerSearch.classList.add('mobile-search-open');
+    search.style.display='block';
+    search.disabled=false;
+    // Focus after the tap event finishes so the mobile browser accepts it.
+    requestAnimationFrame(()=>{
+      search.focus({preventScroll:true});
+      search.select?.();
+    });
   }
 
-  function openGuide(){
+  function openGuide(e){
+    e?.preventDefault?.();
+    e?.stopPropagation?.();
     if(!guidePanel)return;
     window.iptvV14?.renderGuide?.();
     document.body.classList.add('guide-open');
   }
 
-  nav?.querySelectorAll('button').forEach(btn=>{
-    btn.addEventListener('click',()=>{
-      const type=btn.dataset.nav;
-      if(type==='search')focusSearch();
-      if(type==='guide')openGuide();
-    },true);
-  });
+  // Capture the mobile Search/Guide taps before any other navigation handler.
+  if(nav){
+    const searchBtn=nav.querySelector('[data-nav="search"]');
+    const guideBtn=nav.querySelector('[data-nav="guide"]');
+    searchBtn?.addEventListener('pointerup',focusSearch,{capture:true});
+    searchBtn?.addEventListener('click',focusSearch,{capture:true});
+    guideBtn?.addEventListener('pointerup',openGuide,{capture:true});
+    guideBtn?.addEventListener('click',openGuide,{capture:true});
+  }
 
   document.addEventListener('keydown',e=>{
     if(e.key==='Escape')headerSearch?.classList.remove('mobile-search-open');
