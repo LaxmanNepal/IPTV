@@ -1,0 +1,37 @@
+/* V25 iPhone Liquid UI */
+:root{--liquid-bg:#07080c;--liquid-border:rgba(255,255,255,.12);--liquid-shadow:0 18px 55px rgba(0,0,0,.28)}
+body{background:radial-gradient(circle at 15% -10%,rgba(120,92,255,.16),transparent 35%),radial-gradient(circle at 90% 10%,rgba(0,190,255,.10),transparent 32%),var(--liquid-bg);background-attachment:fixed}
+.topbar,.tv-toolbar,.channel-panel,.browse-section,.hero,.now-playing,.tv-guide{backdrop-filter:blur(28px) saturate(145%);-webkit-backdrop-filter:blur(28px) saturate(145%)}
+.topbar{background:rgba(10,11,16,.72)!important;border-bottom:1px solid var(--liquid-border)!important;box-shadow:0 10px 40px rgba(0,0,0,.16);transition:background .35s ease,box-shadow .35s ease}
+.search,.small-btn,.icon-btn,.cat,.control-btn,.mobile-nav,.channel,.row-card{transition:transform .25s cubic-bezier(.2,.8,.2,1),background .25s ease,border-color .25s ease,box-shadow .25s ease}
+.search{background:rgba(255,255,255,.075)!important;box-shadow:inset 0 1px rgba(255,255,255,.08),0 8px 30px rgba(0,0,0,.12)}
+.search:focus-within{background:rgba(255,255,255,.11)!important;border-color:rgba(145,120,255,.65)!important;box-shadow:0 0 0 4px rgba(125,100,255,.12),0 12px 38px rgba(0,0,0,.22)}
+.search input{color:#fff!important}
+.small-btn,.icon-btn,.cat,.control-btn{background:rgba(255,255,255,.065)!important;backdrop-filter:blur(18px);-webkit-backdrop-filter:blur(18px)}
+.small-btn:hover,.icon-btn:hover,.cat:hover,.control-btn:hover,.row-card:hover,.channel:hover{transform:translateY(-2px);background:rgba(255,255,255,.11)!important}
+.cat.active{box-shadow:0 8px 30px rgba(120,90,255,.2),inset 0 1px rgba(255,255,255,.12)}
+.channel,.row-card{background:rgba(255,255,255,.045)!important;box-shadow:0 7px 24px rgba(0,0,0,.12)}
+.channel.active,.row-card.active{background:rgba(120,100,255,.16)!important;border-color:rgba(145,125,255,.48)!important;box-shadow:0 12px 38px rgba(100,80,255,.18),inset 0 1px rgba(255,255,255,.1)}
+.channel-panel{background:rgba(16,18,25,.62)!important;border:1px solid var(--liquid-border);box-shadow:var(--liquid-shadow)}
+.player-shell{box-shadow:0 20px 60px rgba(0,0,0,.35)}
+.hero{background:linear-gradient(135deg,rgba(255,255,255,.055),rgba(255,255,255,.018))!important;border:1px solid var(--liquid-border);box-shadow:var(--liquid-shadow)}
+.mobile-nav{background:rgba(12,13,19,.76)!important;border:1px solid rgba(255,255,255,.10)!important;box-shadow:0 -12px 45px rgba(0,0,0,.30);backdrop-filter:blur(30px) saturate(160%);-webkit-backdrop-filter:blur(30px) saturate(160%)}
+.mobile-nav button{background:transparent!important;border:0!important}
+.mobile-nav button.active{color:#c6baff;transform:translateY(-2px)}
+.mobile-nav button:active,.small-btn:active,.cat:active,.control-btn:active,.channel:active,.row-card:active{transform:scale(.96)}
+#searchSuggestions{display:none;position:absolute;left:-1px;right:-1px;top:calc(100% + 9px);z-index:100002;padding:7px;border:1px solid rgba(255,255,255,.13);border-radius:18px;background:rgba(17,19,27,.88);box-shadow:0 22px 60px rgba(0,0,0,.42);backdrop-filter:blur(30px) saturate(160%);-webkit-backdrop-filter:blur(30px) saturate(160%);overflow:hidden}
+#searchSuggestions.show{display:block;animation:liquidIn .22s ease both}
+.search-suggestion{width:100%;display:flex;align-items:center;gap:10px;padding:9px;border:0;border-radius:13px;background:transparent;color:inherit;text-align:left;cursor:pointer;transition:background .2s,transform .2s}
+.search-suggestion:hover,.search-suggestion:focus{outline:0;background:rgba(255,255,255,.09);transform:translateX(2px)}
+.search-suggestion .channel-logo{width:38px;height:38px;flex:0 0 38px;border-radius:10px}.search-suggestion .channel-info{min-width:0}.search-suggestion .channel-info strong{display:block;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;font-size:13px}.search-suggestion .channel-info span{display:block;font-size:10px;opacity:.62;margin-top:3px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}.search-suggestion .stream-state,.search-suggestion .heart{margin-left:auto}.search-empty{padding:15px 12px;text-align:center;font-size:12px;opacity:.65}
+@keyframes liquidIn{from{opacity:0;transform:translateY(-7px) scale(.98)}to{opacity:1;transform:none}}
+@media(max-width:700px){
+ .topbar{position:sticky!important;top:0!important;z-index:1000!important;padding:9px 10px!important}
+ .brand{white-space:nowrap}.header-actions{gap:7px!important}
+ #headerSearch.search{width:calc(100vw - 116px)!important;min-width:0!important;max-width:none!important;height:40px!important;border-radius:14px!important}
+ #themeBtn{width:38px!important;height:38px!important;flex:0 0 38px!important}
+ #searchSuggestions{top:calc(100% + 7px);border-radius:17px;max-height:min(58vh,430px);overflow:auto}
+ .hero{margin-top:10px!important;border-radius:22px!important}.tv-toolbar{border-radius:18px;margin-top:10px}.channel-panel,.tv-guide{border-radius:20px!important}
+ .mobile-nav{bottom:max(8px,env(safe-area-inset-bottom))!important;left:8px!important;right:8px!important;width:auto!important;border-radius:22px!important;padding-bottom:env(safe-area-inset-bottom)!important}
+}
+@media(prefers-reduced-motion:reduce){*{scroll-behavior:auto!important;animation:none!important;transition:none!important}}
