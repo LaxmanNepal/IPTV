@@ -1,4 +1,4 @@
-const CACHE='laxman-iptv-v18';
+const CACHE='laxman-iptv-v19';
 const APP=['./','./index.html','./style.css','./rows.css','./v12-player.css','./v13-tv.css','./v14-tv.css','./v15-home.css','./v16-ott.css','./v17-launcher.css','./v18-shell.css','./app-tv.js','./v9-player.js','./v10-player.js','./v11-player.js','./v12-player.js','./v13-tv.js','./v14-tv.js','./v15-home.js','./v16-ott.js','./v17-launcher.js','./v18-shell.js','./manifest.webmanifest'];
 self.addEventListener('install',e=>e.waitUntil(caches.open(CACHE).then(c=>c.addAll(APP)).then(()=>self.skipWaiting())));
 self.addEventListener('activate',e=>e.waitUntil(caches.keys().then(keys=>Promise.all(keys.filter(k=>k!==CACHE).map(k=>caches.delete(k)))).then(()=>self.clients.claim())));
