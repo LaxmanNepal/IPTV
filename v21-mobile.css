@@ -1,9 +1,11 @@
-/* V21 mobile controls */
+/* V24 mobile controls */
 @media(max-width:700px){
+  .mobile-nav{position:fixed!important;left:0!important;right:0!important;bottom:0!important;z-index:99999!important;pointer-events:auto!important;touch-action:manipulation!important}
+  .mobile-nav button{position:relative;z-index:100000!important;pointer-events:auto!important;touch-action:manipulation!important;cursor:pointer}
   .header-actions{min-width:0;flex:1;justify-content:flex-end}
-  .header-actions .search{transition:width .22s ease,background .22s ease,border-color .22s ease}
-  .header-actions .search.mobile-search-open{position:absolute;left:12px;right:52px;width:auto;height:42px;z-index:60;background:rgba(15,17,24,.97);border-color:rgba(124,92,255,.55);box-shadow:0 12px 35px rgba(0,0,0,.35)}
-  .header-actions .search.mobile-search-open input{display:block!important;font-size:14px}
+  .header-actions .search{transition:width .22s ease,background .22s ease,border-color .22s ease;pointer-events:auto!important}
+  .header-actions .search.mobile-search-open{position:absolute;left:12px;right:52px;width:auto;height:42px;z-index:100001;background:rgba(15,17,24,.97);border-color:rgba(124,92,255,.55);box-shadow:0 12px 35px rgba(0,0,0,.35);pointer-events:auto!important}
+  .header-actions .search.mobile-search-open input{display:block!important;visibility:visible!important;opacity:1!important;pointer-events:auto!important;font-size:14px}
   .header-actions .search.mobile-search-open span{font-size:19px;color:#b7aaff}
   .mobile-nav{gap:0;padding-left:3px;padding-right:3px}
   .mobile-nav button{min-width:0;padding:0 2px;font-size:16px}
