@@ -1,0 +1,18 @@
+/* V27 Liquid Glass interaction polish */
+.topbar{transform:translateZ(0);will-change:background,box-shadow,padding;}
+.topbar.liquid-scrolled{background:rgba(8,9,14,.88)!important;box-shadow:0 14px 48px rgba(0,0,0,.28)!important;backdrop-filter:blur(34px) saturate(175%);-webkit-backdrop-filter:blur(34px) saturate(175%)}
+.search.liquid-focus{transform:scale(1.012);}
+.mobile-nav{will-change:transform,box-shadow;background:linear-gradient(180deg,rgba(255,255,255,.055),rgba(255,255,255,.018)),rgba(12,13,19,.76)!important;}
+.mobile-nav:before{content:'';position:absolute;inset:1px;border-radius:inherit;background:linear-gradient(120deg,rgba(255,255,255,.11),transparent 28%,transparent 72%,rgba(150,120,255,.08));pointer-events:none}
+.mobile-nav button{position:relative;overflow:hidden}
+.mobile-nav button:after{content:'';position:absolute;left:50%;bottom:4px;width:0;height:3px;border-radius:99px;background:currentColor;opacity:0;transform:translateX(-50%);transition:width .25s ease,opacity .25s ease}
+.mobile-nav button.active:after{width:22px;opacity:.9}
+.mobile-nav button.liquid-pressed:before{content:'';position:absolute;inset:4px;border-radius:16px;background:rgba(255,255,255,.08);animation:liquidTap .26s ease both}
+@keyframes liquidTap{0%{opacity:0;transform:scale(.7)}45%{opacity:1;transform:scale(1)}100%{opacity:0;transform:scale(1.12)}}
+@media(max-width:700px){
+ .topbar{transition:background .35s ease,box-shadow .35s ease,transform .25s ease}
+ .topbar.liquid-scrolled{padding-top:7px!important;padding-bottom:7px!important}
+ .mobile-nav.liquid-nav-scrolled{box-shadow:0 -16px 55px rgba(0,0,0,.38),0 0 0 1px rgba(255,255,255,.04) inset}
+ .search:focus-within{transform:scale(1.008)}
+}
+@media(prefers-reduced-motion:reduce){.topbar,.search,.mobile-nav button,.mobile-nav button:after{transition:none!important}.mobile-nav button.liquid-pressed:before{animation:none!important}}
