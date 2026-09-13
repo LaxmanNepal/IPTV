@@ -1,0 +1,8 @@
+/* V22: keep the player as the primary Live TV surface and make mobile controls usable */
+#playerShell{min-height:0;visibility:visible!important;opacity:1!important}
+@media(max-width:700px){
+  .topbar .search.mobile-search-open{width:min(260px,58vw);}
+  .topbar .search.mobile-search-open input{display:block;min-width:0;}
+  .topbar .search.mobile-search-open>span{display:inline-flex;}
+  .mobile-nav button[data-nav="search"],.mobile-nav button[data-nav="guide"]{cursor:pointer;}
+}
