@@ -1,11 +1,14 @@
-/* V20: Live TV is the actual landing screen */
-#top>.hero,#top>.tv-toolbar,#top>#categories,#top>.browse-section{display:none!important}
-.v17-launcher{display:none!important}
-.v18-shell{margin-top:8px}
-.v18-page-head{display:none!important}
-.v18-mobile-tabs{display:none!important}
-.v20-live-stage{margin-top:0}
-.v20-live-stage .player-wrap{display:block}
-.v20-live-stage .player-shell{aspect-ratio:16/9;min-height:300px;background:#050609}
-.v20-live-stage .now-playing{display:flex}
-@media(max-width:760px){.v18-shell{margin:0;border-radius:0;border-left:0;border-right:0}.v18-content{padding:8px 8px 24px}.v20-live-stage .player-shell{min-height:210px;aspect-ratio:16/9}.v20-live-stage .now-playing{margin-top:6px}.v20-live-stage+.v18-rail{margin-top:18px}}
+/* V21: restore the requested Live TV landing layout as the first screen */
+#top>.hero,#top>.tv-toolbar,#top>#categories,#top>.watch-layout,#top>.browse-section{display:block!important}
+#top>.hero{display:flex!important}
+#top>.tv-toolbar{display:flex!important}
+#top>#categories{display:flex!important}
+#top>.watch-layout{display:grid!important}
+#top>.browse-section{display:block!important}
+.v18-shell,.v17-launcher{display:none!important}
+body{overflow-x:hidden}
+#top{padding-top:8px}
+.hero{margin-top:0!important}
+.watch-layout{scroll-margin-top:16px}
+@media(max-width:900px){#top>.watch-layout{display:flex!important}}
+@media(max-width:640px){#top{padding-top:4px}.hero{display:flex!important}.tv-toolbar{display:flex!important}.categories{display:flex!important}.watch-layout{display:flex!important}}
