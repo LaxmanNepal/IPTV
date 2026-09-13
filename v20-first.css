@@ -1,0 +1,11 @@
+/* V20: Live TV is the actual landing screen */
+#top>.hero,#top>.tv-toolbar,#top>#categories,#top>.browse-section{display:none!important}
+.v17-launcher{display:none!important}
+.v18-shell{margin-top:8px}
+.v18-page-head{display:none!important}
+.v18-mobile-tabs{display:none!important}
+.v20-live-stage{margin-top:0}
+.v20-live-stage .player-wrap{display:block}
+.v20-live-stage .player-shell{aspect-ratio:16/9;min-height:300px;background:#050609}
+.v20-live-stage .now-playing{display:flex}
+@media(max-width:760px){.v18-shell{margin:0;border-radius:0;border-left:0;border-right:0}.v18-content{padding:8px 8px 24px}.v20-live-stage .player-shell{min-height:210px;aspect-ratio:16/9}.v20-live-stage .now-playing{margin-top:6px}.v20-live-stage+.v18-rail{margin-top:18px}}
