@@ -7,4 +7,6 @@
   .v32-channel-filters{display:flex;gap:7px;overflow-x:auto;padding:9px 1px 3px;scrollbar-width:none}.v32-channel-filters::-webkit-scrollbar{display:none}
   .v32-channel-filters button{flex:0 0 auto;border:1px solid rgba(255,255,255,.1);border-radius:999px;padding:8px 13px;background:rgba(255,255,255,.055);color:inherit;font:600 12px/1 inherit;white-space:nowrap;transition:.22s ease}.v32-channel-filters button.active{background:rgba(255,255,255,.16);border-color:rgba(255,255,255,.25);box-shadow:0 5px 18px rgba(0,0,0,.2)}
   .mobile-channels-head{padding-bottom:5px!important}.mobile-channel-empty{grid-column:1/-1;min-height:180px;display:grid;place-content:center;text-align:center;opacity:.65}.mobile-channel-empty small{display:block;margin-top:6px;font-size:12px;opacity:.7}
+  .mobile-channel-top{position:relative}.v33-favorite-mark{position:absolute;right:7px;top:7px;width:25px;height:25px;display:grid;place-items:center;border-radius:50%;background:rgba(0,0,0,.46);border:1px solid rgba(255,255,255,.16);backdrop-filter:blur(10px);font-size:12px;box-shadow:0 4px 16px rgba(0,0,0,.25)}
+  .v32-channel-filters button[data-filter="Favorites"],.v32-channel-filters button[data-filter="Recent"]{font-weight:700}
 }
